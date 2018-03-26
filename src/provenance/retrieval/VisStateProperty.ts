@@ -97,17 +97,17 @@ class PropertyValue implements IPropertyValue {
   }
 }
 
-export function categoricalProperty(text:string, values:string[]|{text:string, id?:string}[]):IProperty {
+export function categoricalProperty(text:string, values:string[]|{text:string, id?:string, group?: string}[]):IProperty {
   const vals:IPropertyValue[] = (<any>values).map((d) => createPropertyValue(PropertyType.CATEGORICAL, d));
   return new Property(PropertyType.CATEGORICAL, text, vals);
 }
 
-export function setProperty(text:string, values:string[]|{text:string, id?:string}[]):IProperty {
+export function setProperty(text:string, values:string[]|{text:string, id?:string, group?: string}[]):IProperty {
   const vals:IPropertyValue[] = (<any>values).map((d) => createPropertyValue(PropertyType.SET, d));
   return new Property(PropertyType.SET, text, vals);
 }
 
-export function numericalProperty(text:string, values:string[]|{text:string, id?:string}[], needsInput:boolean = false):IProperty {
+export function numericalProperty(text:string, values:string[]|{text:string, id?:string, group?: string}[], needsInput:boolean = false):IProperty {
   const textAddon = (needsInput) ? ` ${TAG_VALUE_SEPARATOR} <i>&lt;number&gt;</i>` : '';
   const vals:IPropertyValue[] = (<any>values).map((d) => {
     const prop = createPropertyValue(PropertyType.NUMERICAL, d, textAddon);
